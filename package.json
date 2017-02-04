@@ -32,6 +32,7 @@
     "eslint-plugin-babel": "^3.2.0",
     "eslint-plugin-react": "^5.0.1",
     "express": "^4.13.4",
+    "extract-text-webpack-plugin": "^1.0.1",
     "raven-js": "^2.3.0",
     "node-sass": "^3.8.0",
     "postcss-loader": "^0.9.1",
@@ -50,7 +51,12 @@
     "style-loader": "^0.13.1",
     "webpack": "^1.13.0",
     "webpack-dev-middleware": "^1.6.1",
-    "webpack-hot-middleware": "^2.10.0"
+    "webpack-hot-middleware": "^2.10.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-util": "^3.0.7",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "expect": "^1.18.0",

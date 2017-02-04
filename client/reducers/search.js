@@ -1,19 +1,16 @@
 function search(state = [], action) {
   switch(action.type) {
-    case 'KEYWORD_SEARCH' :
-    	console.log('keyword search');
-      return state;
+	case 'KEYWORD_SEARCH' :
+	  return state;
 
-    case 'UPDATE_SEARCH' :
-    	console.log(action);
+	case 'UPDATE_SEARCH' :
 		return {
 			...state,
 			keyword: action.value
 		}
-    	return state;
 
-    default:
-      return state;
+	default:
+	  return state;
   }
 }
 

@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   devtool: 'source-map',
@@ -10,20 +11,15 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/static/'
+    publicPath: '/dist/'
   },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': "'production'"
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compressor: {
-        warnings: false
-      }
-    })
+    new ExtractTextPlugin('bundle.css')
   ],
   module: {
     loaders: [
@@ -37,7 +33,7 @@ module.exports = {
     {
       test: /\.scss/,
       loader: ExtractTextPlugin.extract('style', 'css!sass!postcss'),
-      include: path.resolve(__dirname, 'src')
+      include: path.resolve(__dirname, 'client')
     }
     ]
   }
