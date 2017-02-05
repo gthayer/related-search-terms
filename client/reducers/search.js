@@ -1,7 +1,14 @@
 function search(state = [], action) {
   switch(action.type) {
-	case 'KEYWORD_SEARCH' :
-	  return state;
+
+  	case 'RECEIVE_POSTS' :
+
+		return {
+			...state,
+			results: action.results
+		}
+
+  		return state;
 
 	case 'UPDATE_SEARCH' :
 		return {

@@ -4,16 +4,12 @@ var gulp = require('gulp');
 var path = require('path');
 var gutil = require('gulp-util');
 var webpack = require('webpack');
-var sass = require('gulp-sass');
-var autoprefixer = require('gulp-autoprefixer');
 
 function onBuild( done ) {
 	return function( err, stats ) {
 		if ( err ) {
 			throw new gutil.PluginError( 'webpack', err );
 		}
-
-		console.log(done);
 
 		gutil.log( 'Building JS…', stats.toString( {
 			colors: true
@@ -30,35 +26,10 @@ function getWebpackConfig() {
 
 	config.entry = {
 		app: './client/keyword-search.js',
-		// vendor: [ 'babel-core/polyfill', 'classnames', 'moment', 'page' ]
 	};
 
 	return config;
 }
-
-function doSass() {
-	if ( arguments.length ) {
-		console.log('Sass file ' + arguments[0].path + ' changed.');
-	}
-	var start = new Date();
-	console.log('Building CSS bundle');
-	gulp.src( './sass/style.scss' )
-		.pipe( sass().on( 'error', sass.logError ) )
-		.pipe( autoprefixer() )
-		.pipe( gulp.dest( './' ) )
-		.on( 'end', function() {
-			console.log( 'CSS finished.' );
-		} );
-};
-
-gulp.task( 'sass:build', function() {
-	doSass();
-} );
-
-gulp.task( 'sass:watch', function() {
-	doSass();
-	gulp.watch( [ './sass/**/*.scss', './js/**/*.scss' ], doSass );
-} );
 
 gulp.task( 'react:build', function( done ) {
 	webpack( getWebpackConfig() ).run( onBuild( done ) );

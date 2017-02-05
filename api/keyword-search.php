@@ -1,16 +1,9 @@
 <?php
 
-$search = $_GET['term'];
+$method = $_SERVER['REQUEST_METHOD'];
+$request = explode('/', trim($_SERVER['PATH_INFO'],'/'));
 
-if ( empty( $search ) ) {
-    ?>
-    <form>
-        <input type="text" name="term">
-        <input type="submit">
-    </form>
-    <?php
-}
-
+$search = $request[0];
 
 $url = "https://www.google.com/search?q=" . $search;
 
@@ -30,7 +23,5 @@ foreach( $xpath->query('//p[contains(attribute::class, "_Bmc")]') as $e ) {
     array_push( $keywords, $e->textContent );
 }
 
-foreach ( $keywords as $keyword ) {
-    $slug = str_replace(' ', '-', $keyword);
-    echo '<p><a href="?term=' . $slug . '">' . $keyword . '</a></p>';
-}
+echo json_encode( $keywords );
+exit;
