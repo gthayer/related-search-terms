@@ -32,6 +32,6 @@ export function keyword_search( keyword, e ) {
 			});
 		}
 	} else {
-		return receive_results();
+		return receive_results([]);
 	}
 }

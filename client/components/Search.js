@@ -2,6 +2,10 @@ import React from 'react';
 
 const Search = React.createClass({
 
+	getInitialState() {
+		return { keyword : 'gary' };
+	},
+
   render() {
 
 	const { keyword } = this.props.search;
