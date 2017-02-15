@@ -13,3 +13,50 @@ body {
 	padding: 2em;
 	text-align: center;
 }
+
+.search-results {
+	padding: 1em 0;
+
+	.search-result {
+		margin: 0.25em 0;
+
+		.result {
+			background: #eee;
+			padding: 0.5em;
+			display: inline-block;
+			text-transform: capitalize;
+			cursor: pointer;
+		}
+
+		.save-btn {
+			background: #ccc;
+			padding: 0.5em;
+			display: inline-block;
+			text-transform: uppercase;
+			cursor: pointer;
+		}
+	}
+}
+
+.saved-keywords {
+	padding: 1em 0;
+
+	.saved-keyword {
+		margin: 0.25em 0;
+
+		.keyword {
+			background: #eee;
+			padding: 0.5em;
+			display: inline-block;
+			text-transform: capitalize;
+		}
+
+		.remove-btn {
+			padding: 0.5em;
+			background: red;
+			color: #fff;
+			text-transform: uppercase;
+			cursor: pointer;
+		}
+	}
+}

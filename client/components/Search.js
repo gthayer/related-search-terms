@@ -13,7 +13,7 @@ const Search = React.createClass({
 	return (
 	  <div className="search-area">
 		<form onSubmit={ e => this.props.keyword_search( keyword, e ) }>
-			<input value={ keyword } onChange={ e => this.props.update_search( keyword, e.target.value) } type="text" name="keyword" />
+			<input value={ keyword } onChange={ e => this.props.update_search( e.target.value) } type="text" name="keyword" />
 			<input type="submit" value="submit" />
 		</form>
 	  </div>

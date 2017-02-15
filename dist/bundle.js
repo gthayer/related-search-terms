@@ -56,7 +56,7 @@
 	
 	var _App2 = _interopRequireDefault(_App);
 	
-	var _Search = __webpack_require__(278);
+	var _Search = __webpack_require__(280);
 	
 	var _Search2 = _interopRequireDefault(_Search);
 	
@@ -64,7 +64,7 @@
 	
 	var _reactRedux = __webpack_require__(200);
 	
-	var _store = __webpack_require__(279);
+	var _store = __webpack_require__(281);
 	
 	var _store2 = _interopRequireDefault(_store);
 	
@@ -21554,7 +21554,8 @@
 	
 	function mapStateToProps(state) {
 	  return {
-	    search: state.search
+	    search: state.search,
+	    results: state.results
 	  };
 	}
 	
@@ -23322,9 +23323,14 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+	
 	exports.receive_results = receive_results;
 	exports.update_search = update_search;
 	exports.keyword_search = keyword_search;
+	exports.save_keyword = save_keyword;
+	exports.remove_keyword = remove_keyword;
 	// Main search function
 	function receive_results(results) {
 		return {
@@ -23333,10 +23339,9 @@
 		};
 	}
 	
-	function update_search(keyword, value) {
+	function update_search(value) {
 		return {
 			type: 'UPDATE_SEARCH',
-			keyword: keyword,
 			value: value
 		};
 	}
@@ -23348,18 +23353,43 @@
 		}
 	
 		if (typeof keyword != 'undefined') {
+			var _ret = function () {
 	
-			return function (dispatch, getState) {
+				var slug = keyword.replace(/\s+/g, '-').toLowerCase();
+				update_search(keyword);
 	
-				fetch('../../api/keyword-search.php/' + keyword).then(function (resp) {
-					resp.json().then(function (json) {
-						return dispatch(receive_results(json));
-					});
-				});
-			};
+				return {
+					v: function v(dispatch, getState) {
+	
+						fetch('../../api/keyword-search.php/' + slug).then(function (resp) {
+							resp.json().then(function (json) {
+								return dispatch(update_search(keyword)), dispatch(receive_results(json));
+							});
+						});
+					}
+				};
+			}();
+	
+			if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 		} else {
 			return receive_results([]);
 		}
+	}
+	
+	function save_keyword(keyword) {
+	
+		return {
+			type: 'SAVE_KEYWORD',
+			keyword: keyword
+		};
+	}
+	
+	function remove_keyword(i) {
+	
+		return {
+			type: 'REMOVE_KEYWORD',
+			i: i
+		};
 	}
 
 /***/ },
@@ -23388,6 +23418,14 @@
 	
 	var _Results2 = _interopRequireDefault(_Results);
 	
+	var _Saved = __webpack_require__(278);
+	
+	var _Saved2 = _interopRequireDefault(_Saved);
+	
+	var _Download = __webpack_require__(279);
+	
+	var _Download2 = _interopRequireDefault(_Download);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Main = _react2.default.createClass({
@@ -23406,7 +23444,9 @@
 	        )
 	      ),
 	      _react2.default.cloneElement(_extends({}, this.props).children, _extends({}, this.props)),
-	      _react2.default.createElement(_Results2.default, this.props)
+	      _react2.default.createElement(_Results2.default, this.props),
+	      _react2.default.createElement(_Saved2.default, this.props),
+	      _react2.default.createElement(_Download2.default, this.props)
 	    );
 	  }
 	});
@@ -28986,7 +29026,7 @@
 	
 	
 	// module
-	exports.push([module.id, "body {\n  background: #ddd; }\n\n#root {\n  max-width: 1200px;\n  margin: 0 auto; }\n\n.content {\n  background: #fff;\n  padding: 2em;\n  text-align: center; }\n", ""]);
+	exports.push([module.id, "body {\n  background: #ddd; }\n\n#root {\n  max-width: 1200px;\n  margin: 0 auto; }\n\n.content {\n  background: #fff;\n  padding: 2em;\n  text-align: center; }\n\n.search-results {\n  padding: 1em 0; }\n  .search-results .search-result {\n    margin: 0.25em 0; }\n    .search-results .search-result .result {\n      background: #eee;\n      padding: 0.5em;\n      display: inline-block;\n      text-transform: capitalize;\n      cursor: pointer; }\n    .search-results .search-result .save-btn {\n      background: #ccc;\n      padding: 0.5em;\n      display: inline-block;\n      text-transform: uppercase;\n      cursor: pointer; }\n\n.saved-keywords {\n  padding: 1em 0; }\n  .saved-keywords .saved-keyword {\n    margin: 0.25em 0; }\n    .saved-keywords .saved-keyword .keyword {\n      background: #eee;\n      padding: 0.5em;\n      display: inline-block;\n      text-transform: capitalize; }\n    .saved-keywords .saved-keyword .remove-btn {\n      padding: 0.5em;\n      background: red;\n      color: #fff;\n      text-transform: uppercase;\n      cursor: pointer; }\n", ""]);
 	
 	// exports
 
@@ -29360,6 +29400,8 @@
 	var Result = _react2.default.createClass({
 			displayName: "Result",
 			render: function render() {
+					var _this = this;
+	
 					var _props = this.props,
 					    result = _props.result,
 					    i = _props.i;
@@ -29368,7 +29410,20 @@
 					return _react2.default.createElement(
 							"div",
 							{ className: "search-result" },
-							result
+							_react2.default.createElement(
+									"span",
+									{ onClick: function onClick(e) {
+													return _this.props.keyword_search(result);
+											}, className: "result" },
+									result
+							),
+							_react2.default.createElement(
+									"span",
+									{ onClick: function onClick(e) {
+													return _this.props.save_keyword(result);
+											}, className: "save-btn" },
+									"save"
+							)
 					);
 			}
 	});
@@ -29377,6 +29432,97 @@
 
 /***/ },
 /* 278 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Saved = _react2.default.createClass({
+		displayName: "Saved",
+		render: function render() {
+			var _this = this;
+	
+			var _props = this.props,
+			    results = _props.results,
+			    i = _props.i;
+	
+	
+			return _react2.default.createElement(
+				"div",
+				{ className: "saved-keywords" },
+				results.map(function (result, i) {
+					return _react2.default.createElement(
+						"div",
+						{ className: "saved-keyword", key: i },
+						_react2.default.createElement(
+							"span",
+							{ className: "keyword" },
+							result
+						),
+						_react2.default.createElement(
+							"span",
+							{ onClick: function onClick(e) {
+									return _this.props.remove_keyword(i);
+								}, className: "remove-btn" },
+							"Remove"
+						)
+					);
+				})
+			);
+		}
+	});
+	
+	exports.default = Saved;
+
+/***/ },
+/* 279 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Download = _react2.default.createClass({
+	  displayName: "Download",
+	  render: function render() {
+	
+	    if (this.props.results.length > 0) {
+	      return _react2.default.createElement(
+	        "div",
+	        { className: "download-keyword" },
+	        _react2.default.createElement(
+	          "button",
+	          { className: "download-csv" },
+	          "Download"
+	        )
+	      );
+	    } else {
+	      return _react2.default.createElement("div", { className: "download-keyword" });
+	    }
+	  }
+	});
+	
+	exports.default = Download;
+
+/***/ },
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29411,7 +29557,7 @@
 							return _this.props.keyword_search(keyword, e);
 						} },
 					_react2.default.createElement('input', { value: keyword, onChange: function onChange(e) {
-							return _this.props.update_search(keyword, e.target.value);
+							return _this.props.update_search(e.target.value);
 						}, type: 'text', name: 'keyword' }),
 					_react2.default.createElement('input', { type: 'submit', value: 'submit' })
 				)
@@ -29422,7 +29568,7 @@
 	exports.default = Search;
 
 /***/ },
-/* 279 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29432,23 +29578,23 @@
 	});
 	exports.history = undefined;
 	
-	var _reduxThunk = __webpack_require__(280);
+	var _reduxThunk = __webpack_require__(282);
 	
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 	
-	var _reduxLogger = __webpack_require__(281);
+	var _reduxLogger = __webpack_require__(283);
 	
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 	
 	var _redux = __webpack_require__(179);
 	
-	var _reactRouterRedux = __webpack_require__(287);
+	var _reactRouterRedux = __webpack_require__(289);
 	
 	var _reactRouter = __webpack_require__(211);
 	
 	var _actionCreators = __webpack_require__(209);
 	
-	var _index = __webpack_require__(292);
+	var _index = __webpack_require__(294);
 	
 	var _index2 = _interopRequireDefault(_index);
 	
@@ -29477,7 +29623,7 @@
 	exports.default = store;
 
 /***/ },
-/* 280 */
+/* 282 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29505,7 +29651,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 281 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29516,11 +29662,11 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _core = __webpack_require__(282);
+	var _core = __webpack_require__(284);
 	
-	var _helpers = __webpack_require__(283);
+	var _helpers = __webpack_require__(285);
 	
-	var _defaults = __webpack_require__(286);
+	var _defaults = __webpack_require__(288);
 	
 	var _defaults2 = _interopRequireDefault(_defaults);
 	
@@ -29623,7 +29769,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 282 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29636,9 +29782,9 @@
 	
 	exports.printBuffer = printBuffer;
 	
-	var _helpers = __webpack_require__(283);
+	var _helpers = __webpack_require__(285);
 	
-	var _diff = __webpack_require__(284);
+	var _diff = __webpack_require__(286);
 	
 	var _diff2 = _interopRequireDefault(_diff);
 	
@@ -29765,7 +29911,7 @@
 	}
 
 /***/ },
-/* 283 */
+/* 285 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -29789,7 +29935,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 284 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29799,7 +29945,7 @@
 	});
 	exports.default = diffLogger;
 	
-	var _deepDiff = __webpack_require__(285);
+	var _deepDiff = __webpack_require__(287);
 	
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 	
@@ -29888,7 +30034,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 285 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -30317,7 +30463,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 286 */
+/* 288 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -30368,7 +30514,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 287 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30378,7 +30524,7 @@
 	});
 	exports.routerMiddleware = exports.routerActions = exports.goForward = exports.goBack = exports.go = exports.replace = exports.push = exports.CALL_HISTORY_METHOD = exports.routerReducer = exports.LOCATION_CHANGE = exports.syncHistoryWithStore = undefined;
 	
-	var _reducer = __webpack_require__(288);
+	var _reducer = __webpack_require__(290);
 	
 	Object.defineProperty(exports, 'LOCATION_CHANGE', {
 	  enumerable: true,
@@ -30393,7 +30539,7 @@
 	  }
 	});
 	
-	var _actions = __webpack_require__(289);
+	var _actions = __webpack_require__(291);
 	
 	Object.defineProperty(exports, 'CALL_HISTORY_METHOD', {
 	  enumerable: true,
@@ -30438,11 +30584,11 @@
 	  }
 	});
 	
-	var _sync = __webpack_require__(290);
+	var _sync = __webpack_require__(292);
 	
 	var _sync2 = _interopRequireDefault(_sync);
 	
-	var _middleware = __webpack_require__(291);
+	var _middleware = __webpack_require__(293);
 	
 	var _middleware2 = _interopRequireDefault(_middleware);
 	
@@ -30452,7 +30598,7 @@
 	exports.routerMiddleware = _middleware2['default'];
 
 /***/ },
-/* 288 */
+/* 290 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30495,7 +30641,7 @@
 	}
 
 /***/ },
-/* 289 */
+/* 291 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30537,7 +30683,7 @@
 	var routerActions = exports.routerActions = { push: push, replace: replace, go: go, goBack: goBack, goForward: goForward };
 
 /***/ },
-/* 290 */
+/* 292 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30550,7 +30696,7 @@
 	
 	exports['default'] = syncHistoryWithStore;
 	
-	var _reducer = __webpack_require__(288);
+	var _reducer = __webpack_require__(290);
 	
 	var defaultSelectLocationState = function defaultSelectLocationState(state) {
 	  return state.routing;
@@ -30695,7 +30841,7 @@
 	}
 
 /***/ },
-/* 291 */
+/* 293 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30705,7 +30851,7 @@
 	});
 	exports['default'] = routerMiddleware;
 	
-	var _actions = __webpack_require__(289);
+	var _actions = __webpack_require__(291);
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -30733,7 +30879,7 @@
 	}
 
 /***/ },
-/* 292 */
+/* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30744,20 +30890,24 @@
 	
 	var _redux = __webpack_require__(179);
 	
-	var _reactRouterRedux = __webpack_require__(287);
+	var _reactRouterRedux = __webpack_require__(289);
 	
-	var _search = __webpack_require__(293);
+	var _search = __webpack_require__(295);
 	
 	var _search2 = _interopRequireDefault(_search);
 	
+	var _results = __webpack_require__(296);
+	
+	var _results2 = _interopRequireDefault(_results);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var rootReducer = (0, _redux.combineReducers)({ search: _search2.default, routing: _reactRouterRedux.routerReducer });
+	var rootReducer = (0, _redux.combineReducers)({ search: _search2.default, results: _results2.default, routing: _reactRouterRedux.routerReducer });
 	
 	exports.default = rootReducer;
 
 /***/ },
-/* 293 */
+/* 295 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30780,8 +30930,6 @@
 					results: action.results
 				});
 	
-				return state;
-	
 			case 'UPDATE_SEARCH':
 				return _extends({}, state, {
 					keyword: action.value
@@ -30793,6 +30941,39 @@
 	}
 	
 	exports.default = search;
+
+/***/ },
+/* 296 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	function result() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+		var action = arguments[1];
+	
+		switch (action.type) {
+	
+			case 'SAVE_KEYWORD':
+	
+				return [].concat(_toConsumableArray(state), [action.keyword]);
+	
+			case 'REMOVE_KEYWORD':
+	
+				return [].concat(_toConsumableArray(state.slice(0, action.i)), _toConsumableArray(state.slice(action.i + 1)));
+	
+			default:
+				return state;
+		}
+	}
+	
+	exports.default = result;
 
 /***/ }
 /******/ ]);

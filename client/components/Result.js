@@ -9,7 +9,9 @@ const Result = React.createClass({
 	return (
 	  <div className="search-result">
 
-	  	{ result }
+	  	<span onClick={ e => this.props.keyword_search( result ) } className="result">{ result }</span>
+
+	  	<span onClick={ e => this.props.save_keyword( result ) } className="save-btn">save</span>
 
 	  </div>
 	)

@@ -8,8 +8,6 @@ function search(state = [], action) {
 			results: action.results
 		}
 
-  		return state;
-
 	case 'UPDATE_SEARCH' :
 		return {
 			...state,

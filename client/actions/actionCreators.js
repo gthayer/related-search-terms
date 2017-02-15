@@ -6,10 +6,9 @@ export function receive_results( results ) {
 	}
 }
 
-export function update_search( keyword, value ) {
+export function update_search( value ) {
 	return {
 		type: 'UPDATE_SEARCH',
-		keyword,
 		value
 	}
 }
@@ -22,16 +21,38 @@ export function keyword_search( keyword, e ) {
 
 	if ( typeof keyword != 'undefined' ) {
 
+		let slug = keyword.replace(/\s+/g, '-').toLowerCase();
+		update_search(keyword);
+
 		return (dispatch, getState) => {
 
-			fetch('../../api/keyword-search.php/' + keyword)
+			fetch('../../api/keyword-search.php/' + slug)
 			.then(function(resp) {
 				resp.json().then(function(json) {
-					return dispatch( receive_results(json) );
+					return (
+						dispatch( update_search(keyword) ),
+						dispatch( receive_results(json) )
+					)
 				})
 			});
 		}
 	} else {
 		return receive_results([]);
+	}
+}
+
+export function save_keyword( keyword ) {
+
+	return {
+		type: 'SAVE_KEYWORD',
+		keyword
+	}
+}
+
+export function remove_keyword( i ) {
+
+	return {
+		type: 'REMOVE_KEYWORD',
+		i
 	}
 }
