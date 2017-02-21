@@ -41,6 +41,15 @@ export function keyword_search( keyword, e ) {
 	}
 }
 
+export function download_csv( saved ) {
+
+	return {
+		type: 'DOWNLOAD_CSV',
+		saved
+	}
+
+}
+
 export function save_keyword( keyword ) {
 
 	return {

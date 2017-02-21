@@ -23329,6 +23329,7 @@
 	exports.receive_results = receive_results;
 	exports.update_search = update_search;
 	exports.keyword_search = keyword_search;
+	exports.download_csv = download_csv;
 	exports.save_keyword = save_keyword;
 	exports.remove_keyword = remove_keyword;
 	// Main search function
@@ -23374,6 +23375,14 @@
 		} else {
 			return receive_results([]);
 		}
+	}
+	
+	function download_csv(saved) {
+	
+		return {
+			type: 'DOWNLOAD_CSV',
+			saved: saved
+		};
 	}
 	
 	function save_keyword(keyword) {
@@ -29502,6 +29511,7 @@
 	var Download = _react2.default.createClass({
 	  displayName: "Download",
 	  render: function render() {
+	    var _this = this;
 	
 	    if (this.props.results.length > 0) {
 	      return _react2.default.createElement(
@@ -29509,8 +29519,10 @@
 	        { className: "download-keyword" },
 	        _react2.default.createElement(
 	          "button",
-	          { className: "download-csv" },
-	          "Download"
+	          { onClick: function onClick(e) {
+	              return _this.props.download_csv(_this.props.results);
+	            }, className: "download-csv" },
+	          "Download Saved Keywords"
 	        )
 	      );
 	    } else {
@@ -30900,9 +30912,13 @@
 	
 	var _results2 = _interopRequireDefault(_results);
 	
+	var _download = __webpack_require__(297);
+	
+	var _download2 = _interopRequireDefault(_download);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var rootReducer = (0, _redux.combineReducers)({ search: _search2.default, results: _results2.default, routing: _reactRouterRedux.routerReducer });
+	var rootReducer = (0, _redux.combineReducers)({ search: _search2.default, results: _results2.default, download: _download2.default, routing: _reactRouterRedux.routerReducer });
 	
 	exports.default = rootReducer;
 
@@ -30974,6 +30990,50 @@
 	}
 	
 	exports.default = result;
+
+/***/ },
+/* 297 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+	
+	function download() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+		var action = arguments[1];
+	
+		var _ret = function () {
+			switch (action.type) {
+	
+				case 'DOWNLOAD_CSV':
+	
+					//let data = [["name1", "city1", "some other info"], ["name2", "city2", "more info"]];
+					var data = action.saved;
+	
+					var csvContent = "data:text/csv;charset=utf-8,";
+					data.forEach(function (keyword, index) {
+						csvContent += index < data.length ? keyword + "\n" : keyword;
+					});
+	
+					var encodedUri = encodeURI(csvContent);
+					window.open(encodedUri);
+	
+				default:
+					return {
+						v: state
+					};
+			}
+		}();
+	
+		if ((typeof _ret === "undefined" ? "undefined" : _typeof(_ret)) === "object") return _ret.v;
+	}
+	
+	exports.default = download;
 
 /***/ }
 /******/ ]);
