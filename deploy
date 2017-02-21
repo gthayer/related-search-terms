@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# build the app
+npm install
+gulp
+
+# deploy it
+rsync -rltpDv --delete \
+	--exclude ".git" \
+	--exclude ".gitignore" \
+	--exclude "readme.md" \
+	--exclude "node_modules" \
+	--exclude "deploy" \
+	. root@10.10.10.127:/home/web/google-related-searches/.
