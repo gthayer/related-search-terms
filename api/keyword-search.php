@@ -13,7 +13,13 @@ $output = curl_exec($curl);
 curl_close($curl);
 
 $dom = new DOMDocument;
+
+// set error level
+$internalErrors = libxml_use_internal_errors(true);
+
 $dom->loadHTML($output);
+// Restore error level
+libxml_use_internal_errors($internalErrors);
 
 $xpath = new DOMXPath($dom);
 
