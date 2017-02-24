@@ -1,4 +1,4 @@
-### A simple react boilerplate including:
+### Google Related Searches
 
 * Webpack
 * React Router
@@ -6,21 +6,15 @@
 
 ### Install
 ```sh
-git clone git@github.com:gthayer/react-redux-boilerplate.git
-cd react-redux-boilerplate
+git clone git@gitlab.com:hallme/google-related-searches.git
+cd google-related-searches
 npm install
 ```
-
-### Run the app from a dev server
+### Complile JSX and SCSS
 ```sh
-npm start
+gulp
 ```
-
-### Build the app
+### Watch Command to Complile JSX and SCSS
 ```sh
-npm run build
+gulp watch
 ```
-
-### Host the app from a server (app must have been built)
-```sh
-npm run serve
