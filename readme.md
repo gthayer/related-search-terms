@@ -1,8 +1,6 @@
 ### Google Related Searches
 
-* Webpack
-* React Router
-* SASS
+Uses search terms to return Google's Related Search values. Useful for longtail keyword research.
 
 ### Install
 ```sh
