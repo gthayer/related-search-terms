@@ -15,6 +15,8 @@ export function update_search( value ) {
 
 export function keyword_search( keyword, e ) {
 
+	console.log('running');
+
 	if ( typeof e != 'undefined' ) {
 		e.preventDefault();		
 	}

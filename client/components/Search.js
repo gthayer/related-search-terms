@@ -3,7 +3,7 @@ import React from 'react';
 const Search = React.createClass({
 
 	getInitialState() {
-		return { keyword : 'gary' };
+		return { keyword : '' };
 	},
 
   render() {
@@ -14,7 +14,7 @@ const Search = React.createClass({
 	  <div className="search-area">
 		<form onSubmit={ e => this.props.keyword_search( keyword, e ) }>
 			<input value={ keyword } onChange={ e => this.props.update_search( e.target.value) } type="text" name="keyword" />
-			<input type="submit" value="submit" />
+			<input type="submit" value="Submit" />
 		</form>
 	  </div>
 	)

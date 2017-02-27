@@ -1,6 +1,7 @@
 // Global
 body {
 	background: #ddd;
+	font-size: 16px;
 }
 
 #root {
@@ -10,8 +11,39 @@ body {
 
 .content {
 	background: #fff;
-	padding: 2em;
 	text-align: center;
+	padding: 2em;
+}
+
+.search-area {
+
+	input[type='text'] {
+		width: 75%;
+		font-size: 2em;
+		padding: 0.5em 1em;
+		display: inline-block;
+		margin: 0;
+		background: #fff;
+		border: 1px solid #ddd;
+	}
+
+	input[type='submit'] {
+		width: 15%;
+		font-size: 16px;
+		font-size: 2em !important;
+		padding: 0.5em 1em;
+		display: inline-block;
+		margin: 0;
+		background: #eee;
+		cursor: pointer;
+		border: 1px solid #ddd;
+		transition: 0.25s;
+
+		&:hover {
+			background: darken( #eee, 25% );
+			border-color: darken( #eee, 25% );
+		}
+	}
 }
 
 .search-results {
@@ -19,6 +51,8 @@ body {
 
 	.search-result {
 		margin: 0.25em 0;
+		width: 25%;
+		float: left;
 
 		.result {
 			background: #eee;
@@ -26,6 +60,9 @@ body {
 			display: inline-block;
 			text-transform: capitalize;
 			cursor: pointer;
+			display: block;
+			width: 70%;
+			float: left;
 		}
 
 		.save-btn {
@@ -34,6 +71,9 @@ body {
 			display: inline-block;
 			text-transform: uppercase;
 			cursor: pointer;
+			display: block;
+			width: 30%;
+			float: left;
 		}
 	}
 }

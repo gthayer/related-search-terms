@@ -23323,9 +23323,6 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-	
 	exports.receive_results = receive_results;
 	exports.update_search = update_search;
 	exports.keyword_search = keyword_search;
@@ -23349,29 +23346,25 @@
 	
 	function keyword_search(keyword, e) {
 	
+		console.log('running');
+	
 		if (typeof e != 'undefined') {
 			e.preventDefault();
 		}
 	
 		if (typeof keyword != 'undefined') {
-			var _ret = function () {
 	
-				var slug = keyword.replace(/\s+/g, '-').toLowerCase();
-				update_search(keyword);
+			var slug = keyword.replace(/\s+/g, '-').toLowerCase();
+			update_search(keyword);
 	
-				return {
-					v: function v(dispatch, getState) {
+			return function (dispatch, getState) {
 	
-						fetch('../../api/keyword-search.php/' + slug).then(function (resp) {
-							resp.json().then(function (json) {
-								return dispatch(update_search(keyword)), dispatch(receive_results(json));
-							});
-						});
-					}
-				};
-			}();
-	
-			if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
+				fetch('../../api/keyword-search.php/' + slug).then(function (resp) {
+					resp.json().then(function (json) {
+						return dispatch(update_search(keyword)), dispatch(receive_results(json));
+					});
+				});
+			};
 		} else {
 			return receive_results([]);
 		}
@@ -23449,7 +23442,7 @@
 	        _react2.default.createElement(
 	          _reactRouter.Link,
 	          { to: '/' },
-	          'Keyword Search'
+	          'Google Related Search Terms'
 	        )
 	      ),
 	      _react2.default.cloneElement(_extends({}, this.props).children, _extends({}, this.props)),
@@ -29016,8 +29009,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./../../node_modules/postcss-loader/index.js!./style.scss", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./../../node_modules/postcss-loader/index.js!./style.scss");
+			module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!../../node_modules/postcss-loader/index.js!./style.scss", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/index.js!../../node_modules/postcss-loader/index.js!./style.scss");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -29035,7 +29028,7 @@
 	
 	
 	// module
-	exports.push([module.id, "body {\n  background: #ddd; }\n\n#root {\n  max-width: 1200px;\n  margin: 0 auto; }\n\n.content {\n  background: #fff;\n  padding: 2em;\n  text-align: center; }\n\n.search-results {\n  padding: 1em 0; }\n  .search-results .search-result {\n    margin: 0.25em 0; }\n    .search-results .search-result .result {\n      background: #eee;\n      padding: 0.5em;\n      display: inline-block;\n      text-transform: capitalize;\n      cursor: pointer; }\n    .search-results .search-result .save-btn {\n      background: #ccc;\n      padding: 0.5em;\n      display: inline-block;\n      text-transform: uppercase;\n      cursor: pointer; }\n\n.saved-keywords {\n  padding: 1em 0; }\n  .saved-keywords .saved-keyword {\n    margin: 0.25em 0; }\n    .saved-keywords .saved-keyword .keyword {\n      background: #eee;\n      padding: 0.5em;\n      display: inline-block;\n      text-transform: capitalize; }\n    .saved-keywords .saved-keyword .remove-btn {\n      padding: 0.5em;\n      background: red;\n      color: #fff;\n      text-transform: uppercase;\n      cursor: pointer; }\n", ""]);
+	exports.push([module.id, "body {\n  background: #ddd;\n  font-size: 16px; }\n\n#root {\n  max-width: 1200px;\n  margin: 0 auto; }\n\n.content {\n  background: #fff;\n  text-align: center;\n  padding: 2em; }\n\n.search-area input[type='text'] {\n  width: 75%;\n  font-size: 2em;\n  padding: 0.5em 1em;\n  display: inline-block;\n  margin: 0;\n  background: #fff;\n  border: 1px solid #ddd; }\n\n.search-area input[type='submit'] {\n  width: 15%;\n  font-size: 16px;\n  font-size: 2em !important;\n  padding: 0.5em 1em;\n  display: inline-block;\n  margin: 0;\n  background: #eee;\n  cursor: pointer;\n  border: 1px solid #ddd;\n  -webkit-transition: 0.25s;\n  transition: 0.25s; }\n  .search-area input[type='submit']:hover {\n    background: #aeaeae;\n    border-color: #aeaeae; }\n\n.search-results {\n  padding: 1em 0; }\n  .search-results .search-result {\n    margin: 0.25em 0;\n    width: 25%;\n    float: left; }\n    .search-results .search-result .result {\n      background: #eee;\n      padding: 0.5em;\n      display: inline-block;\n      text-transform: capitalize;\n      cursor: pointer;\n      display: block;\n      width: 70%;\n      float: left; }\n    .search-results .search-result .save-btn {\n      background: #ccc;\n      padding: 0.5em;\n      display: inline-block;\n      text-transform: uppercase;\n      cursor: pointer;\n      display: block;\n      width: 30%;\n      float: left; }\n\n.saved-keywords {\n  padding: 1em 0; }\n  .saved-keywords .saved-keyword {\n    margin: 0.25em 0; }\n    .saved-keywords .saved-keyword .keyword {\n      background: #eee;\n      padding: 0.5em;\n      display: inline-block;\n      text-transform: capitalize; }\n    .saved-keywords .saved-keyword .remove-btn {\n      padding: 0.5em;\n      background: red;\n      color: #fff;\n      text-transform: uppercase;\n      cursor: pointer; }\n", ""]);
 	
 	// exports
 
@@ -29113,7 +29106,7 @@
 			};
 		},
 		isOldIE = memoize(function() {
-			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+			return /msie [6-9]\b/.test(self.navigator.userAgent.toLowerCase());
 		}),
 		getHeadElement = memoize(function () {
 			return document.head || document.getElementsByTagName("head")[0];
@@ -29446,7 +29439,7 @@
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+			value: true
 	});
 	
 	var _react = __webpack_require__(1);
@@ -29456,38 +29449,47 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var Saved = _react2.default.createClass({
-		displayName: "Saved",
-		render: function render() {
-			var _this = this;
+			displayName: "Saved",
+			render: function render() {
+					var _this = this;
 	
-			var _props = this.props,
-			    results = _props.results,
-			    i = _props.i;
+					var _props = this.props,
+					    results = _props.results,
+					    keyword = _props.keyword,
+					    i = _props.i;
 	
 	
-			return _react2.default.createElement(
-				"div",
-				{ className: "saved-keywords" },
-				results.map(function (result, i) {
-					return _react2.default.createElement(
-						"div",
-						{ className: "saved-keyword", key: i },
-						_react2.default.createElement(
-							"span",
-							{ className: "keyword" },
-							result
-						),
-						_react2.default.createElement(
-							"span",
-							{ onClick: function onClick(e) {
-									return _this.props.remove_keyword(i);
-								}, className: "remove-btn" },
-							"Remove"
-						)
-					);
-				})
-			);
-		}
+					if (results.length > 0) {
+							return _react2.default.createElement(
+									"div",
+									{ className: "saved-keywords" },
+									results.map(function (result, i) {
+											return _react2.default.createElement(
+													"div",
+													{ className: "saved-keyword", key: i },
+													_react2.default.createElement(
+															"span",
+															{ className: "keyword" },
+															result
+													),
+													_react2.default.createElement(
+															"span",
+															{ onClick: function onClick(e) {
+																			return _this.props.remove_keyword(i);
+																	}, className: "remove-btn" },
+															"Remove"
+													)
+											);
+									})
+							);
+					} else {
+							return _react2.default.createElement(
+									"div",
+									{ className: "saved-keywords" },
+									"No keywords have been saved yet."
+							);
+					}
+			}
 	});
 	
 	exports.default = Saved;
@@ -29552,7 +29554,7 @@
 	var Search = _react2.default.createClass({
 		displayName: 'Search',
 		getInitialState: function getInitialState() {
-			return { keyword: 'gary' };
+			return { keyword: '' };
 		},
 		render: function render() {
 			var _this = this;
@@ -29571,7 +29573,7 @@
 					_react2.default.createElement('input', { value: keyword, onChange: function onChange(e) {
 							return _this.props.update_search(e.target.value);
 						}, type: 'text', name: 'keyword' }),
-					_react2.default.createElement('input', { type: 'submit', value: 'submit' })
+					_react2.default.createElement('input', { type: 'submit', value: 'Submit' })
 				)
 			);
 		}
@@ -30803,7 +30805,7 @@
 	  };
 	  unsubscribeFromHistory = history.listen(handleLocationChange);
 	
-	  // support history 3.x
+	  // History 3.x doesn't call listen synchronously, so fire the initial location change ourselves
 	  if (history.getCurrentLocation) {
 	    handleLocationChange(history.getCurrentLocation());
 	  }
@@ -30829,10 +30831,12 @@
 	        }
 	      });
 	
-	      // History listeners expect a synchronous call. Make the first call to the
+	      // History 2.x listeners expect a synchronous call. Make the first call to the
 	      // listener after subscribing to the store, in case the listener causes a
 	      // location change (e.g. when it redirects)
-	      listener(lastPublishedLocation);
+	      if (!history.getCurrentLocation) {
+	        listener(lastPublishedLocation);
+	      }
 	
 	      // Let user unsubscribe later
 	      return function () {
@@ -31000,37 +31004,28 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-	
 	function download() {
 		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 		var action = arguments[1];
 	
-		var _ret = function () {
-			switch (action.type) {
+		switch (action.type) {
 	
-				case 'DOWNLOAD_CSV':
+			case 'DOWNLOAD_CSV':
 	
-					//let data = [["name1", "city1", "some other info"], ["name2", "city2", "more info"]];
-					var data = action.saved;
+				//let data = [["name1", "city1", "some other info"], ["name2", "city2", "more info"]];
+				var data = action.saved;
 	
-					var csvContent = "data:text/csv;charset=utf-8,";
-					data.forEach(function (keyword, index) {
-						csvContent += index < data.length ? keyword + "\n" : keyword;
-					});
+				var csvContent = "data:text/csv;charset=utf-8,";
+				data.forEach(function (keyword, index) {
+					csvContent += index < data.length ? keyword + "\n" : keyword;
+				});
 	
-					var encodedUri = encodeURI(csvContent);
-					window.open(encodedUri);
+				var encodedUri = encodeURI(csvContent);
+				window.open(encodedUri);
 	
-				default:
-					return {
-						v: state
-					};
-			}
-		}();
-	
-		if ((typeof _ret === "undefined" ? "undefined" : _typeof(_ret)) === "object") return _ret.v;
+			default:
+				return state;
+		}
 	}
 	
 	exports.default = download;
