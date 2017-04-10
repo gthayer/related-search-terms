@@ -8,7 +8,7 @@ const Download = React.createClass({
 			return (
 				<div className="download-keyword">
 
-			  		<button onClick={ e => this.props.download_csv(this.props.results) } className="download-csv">Download Saved Keywords</button>
+			  		<button onClick={ e => this.props.download_csv(this.props.results) } className="download-csv">Download Saved Search Terms</button>
 
 				</div>
 			)

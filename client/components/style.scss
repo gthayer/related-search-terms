@@ -11,26 +11,28 @@ body {
 
 .content {
 	background: #fff;
-	text-align: center;
 	padding: 2em;
 }
 
 .search-area {
 
 	input[type='text'] {
-		width: 75%;
-		font-size: 2em;
-		padding: 0.5em 1em;
+		width: 100%;
+		font-size: 1.25em;
+		padding: 0.5em 0.5em;
 		display: inline-block;
 		margin: 0;
 		background: #fff;
 		border: 1px solid #ddd;
+		box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
 	}
 
 	input[type='submit'] {
-		width: 15%;
+		width: 100%;
 		font-size: 16px;
-		font-size: 2em !important;
+		font-size: 1.5em;
 		padding: 0.5em 1em;
 		display: inline-block;
 		margin: 0;
@@ -51,8 +53,9 @@ body {
 
 	.search-result {
 		margin: 0.25em 0;
-		width: 25%;
+		width: 100%;
 		float: left;
+		display: flex;
 
 		.result {
 			background: #eee;
@@ -74,6 +77,7 @@ body {
 			display: block;
 			width: 30%;
 			float: left;
+			text-align: center;
 		}
 	}
 }
@@ -83,20 +87,64 @@ body {
 
 	.saved-keyword {
 		margin: 0.25em 0;
+		width: 100%;
+		float: left;
+		display: flex;
 
 		.keyword {
 			background: #eee;
 			padding: 0.5em;
 			display: inline-block;
 			text-transform: capitalize;
+			cursor: pointer;
+			display: block;
+			width: 70%;
+			float: left;
 		}
 
 		.remove-btn {
-			padding: 0.5em;
-			background: red;
+			background: #f00;
 			color: #fff;
+			padding: 0.5em;
+			display: inline-block;
 			text-transform: uppercase;
 			cursor: pointer;
+			display: block;
+			width: 30%;
+			float: left;
+			text-align: center;
 		}
 	}
+}
+
+.download-keyword {
+	.download-csv {
+		width: 100%;
+		font-size: 16px;
+		font-size: 1em;
+		padding: 0.5em 1em;
+		display: inline-block;
+		margin: 0;
+		background: #eee;
+		cursor: pointer;
+		border: 1px solid #ddd;
+		transition: 0.25s;
+
+		&:hover {
+			background: darken( #eee, 25% );
+			border-color: darken( #eee, 25% );
+		}
+	}
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+} 
+.clearfix:after {
+  clear: both;
+}
+.clearfix {
+  zoom: 1; /* For IE 6/7 (trigger hasLayout) */
 }

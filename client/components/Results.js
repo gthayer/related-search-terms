@@ -8,7 +8,7 @@ const Results = React.createClass({
   	const { results } = this.props.search;
 
 		return (
-		  <div className="search-results">
+		  <div className="search-results clearfix">
 
 		  	{ results.map((result, i) => <Result {...this.props} key={i} i={i} result={result} /> ) }
 

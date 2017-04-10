@@ -29028,7 +29028,7 @@
 	
 	
 	// module
-	exports.push([module.id, "body {\n  background: #ddd;\n  font-size: 16px; }\n\n#root {\n  max-width: 1200px;\n  margin: 0 auto; }\n\n.content {\n  background: #fff;\n  text-align: center;\n  padding: 2em; }\n\n.search-area input[type='text'] {\n  width: 75%;\n  font-size: 2em;\n  padding: 0.5em 1em;\n  display: inline-block;\n  margin: 0;\n  background: #fff;\n  border: 1px solid #ddd; }\n\n.search-area input[type='submit'] {\n  width: 15%;\n  font-size: 16px;\n  font-size: 2em !important;\n  padding: 0.5em 1em;\n  display: inline-block;\n  margin: 0;\n  background: #eee;\n  cursor: pointer;\n  border: 1px solid #ddd;\n  -webkit-transition: 0.25s;\n  transition: 0.25s; }\n  .search-area input[type='submit']:hover {\n    background: #aeaeae;\n    border-color: #aeaeae; }\n\n.search-results {\n  padding: 1em 0; }\n  .search-results .search-result {\n    margin: 0.25em 0;\n    width: 25%;\n    float: left; }\n    .search-results .search-result .result {\n      background: #eee;\n      padding: 0.5em;\n      display: inline-block;\n      text-transform: capitalize;\n      cursor: pointer;\n      display: block;\n      width: 70%;\n      float: left; }\n    .search-results .search-result .save-btn {\n      background: #ccc;\n      padding: 0.5em;\n      display: inline-block;\n      text-transform: uppercase;\n      cursor: pointer;\n      display: block;\n      width: 30%;\n      float: left; }\n\n.saved-keywords {\n  padding: 1em 0; }\n  .saved-keywords .saved-keyword {\n    margin: 0.25em 0; }\n    .saved-keywords .saved-keyword .keyword {\n      background: #eee;\n      padding: 0.5em;\n      display: inline-block;\n      text-transform: capitalize; }\n    .saved-keywords .saved-keyword .remove-btn {\n      padding: 0.5em;\n      background: red;\n      color: #fff;\n      text-transform: uppercase;\n      cursor: pointer; }\n", ""]);
+	exports.push([module.id, "body {\n  background: #ddd;\n  font-size: 16px; }\n\n#root {\n  max-width: 1200px;\n  margin: 0 auto; }\n\n.content {\n  background: #fff;\n  padding: 2em; }\n\n.search-area input[type='text'] {\n  width: 100%;\n  font-size: 1.25em;\n  padding: 0.5em 0.5em;\n  display: inline-block;\n  margin: 0;\n  background: #fff;\n  border: 1px solid #ddd;\n  box-sizing: border-box;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box; }\n\n.search-area input[type='submit'] {\n  width: 100%;\n  font-size: 16px;\n  font-size: 1.5em;\n  padding: 0.5em 1em;\n  display: inline-block;\n  margin: 0;\n  background: #eee;\n  cursor: pointer;\n  border: 1px solid #ddd;\n  -webkit-transition: 0.25s;\n  transition: 0.25s; }\n  .search-area input[type='submit']:hover {\n    background: #aeaeae;\n    border-color: #aeaeae; }\n\n.search-results {\n  padding: 1em 0; }\n  .search-results .search-result {\n    margin: 0.25em 0;\n    width: 100%;\n    float: left;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex; }\n    .search-results .search-result .result {\n      background: #eee;\n      padding: 0.5em;\n      display: inline-block;\n      text-transform: capitalize;\n      cursor: pointer;\n      display: block;\n      width: 70%;\n      float: left; }\n    .search-results .search-result .save-btn {\n      background: #ccc;\n      padding: 0.5em;\n      display: inline-block;\n      text-transform: uppercase;\n      cursor: pointer;\n      display: block;\n      width: 30%;\n      float: left;\n      text-align: center; }\n\n.saved-keywords {\n  padding: 1em 0; }\n  .saved-keywords .saved-keyword {\n    margin: 0.25em 0;\n    width: 100%;\n    float: left;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex; }\n    .saved-keywords .saved-keyword .keyword {\n      background: #eee;\n      padding: 0.5em;\n      display: inline-block;\n      text-transform: capitalize;\n      cursor: pointer;\n      display: block;\n      width: 70%;\n      float: left; }\n    .saved-keywords .saved-keyword .remove-btn {\n      background: #f00;\n      color: #fff;\n      padding: 0.5em;\n      display: inline-block;\n      text-transform: uppercase;\n      cursor: pointer;\n      display: block;\n      width: 30%;\n      float: left;\n      text-align: center; }\n\n.download-keyword .download-csv {\n  width: 100%;\n  font-size: 16px;\n  font-size: 1em;\n  padding: 0.5em 1em;\n  display: inline-block;\n  margin: 0;\n  background: #eee;\n  cursor: pointer;\n  border: 1px solid #ddd;\n  -webkit-transition: 0.25s;\n  transition: 0.25s; }\n  .download-keyword .download-csv:hover {\n    background: #aeaeae;\n    border-color: #aeaeae; }\n\n.clearfix:before,\n.clearfix:after {\n  content: \"\";\n  display: table; }\n\n.clearfix:after {\n  clear: both; }\n\n.clearfix {\n  zoom: 1;\n  /* For IE 6/7 (trigger hasLayout) */ }\n", ""]);
 	
 	// exports
 
@@ -29373,7 +29373,7 @@
 	
 					return _react2.default.createElement(
 							'div',
-							{ className: 'search-results' },
+							{ className: 'search-results clearfix' },
 							results.map(function (result, i) {
 									return _react2.default.createElement(_Result2.default, _extends({}, _this.props, { key: i, i: i, result: result }));
 							})
@@ -29462,7 +29462,12 @@
 					if (results.length > 0) {
 							return _react2.default.createElement(
 									"div",
-									{ className: "saved-keywords" },
+									{ className: "saved-keywords clearfix" },
+									_react2.default.createElement(
+											"h3",
+											null,
+											"Saved Search Terms"
+									),
 									results.map(function (result, i) {
 											return _react2.default.createElement(
 													"div",
@@ -29486,6 +29491,11 @@
 							return _react2.default.createElement(
 									"div",
 									{ className: "saved-keywords" },
+									_react2.default.createElement(
+											"h3",
+											null,
+											"Saved Search Terms"
+									),
 									"No keywords have been saved yet."
 							);
 					}
@@ -29524,7 +29534,7 @@
 	          { onClick: function onClick(e) {
 	              return _this.props.download_csv(_this.props.results);
 	            }, className: "download-csv" },
-	          "Download Saved Keywords"
+	          "Download Saved Search Terms"
 	        )
 	      );
 	    } else {
@@ -29573,7 +29583,7 @@
 					_react2.default.createElement('input', { value: keyword, onChange: function onChange(e) {
 							return _this.props.update_search(e.target.value);
 						}, type: 'text', name: 'keyword' }),
-					_react2.default.createElement('input', { type: 'submit', value: 'Submit' })
+					_react2.default.createElement('input', { type: 'submit', value: 'Search' })
 				)
 			);
 		}
