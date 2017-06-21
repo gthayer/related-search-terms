@@ -2,6 +2,7 @@
 body {
 	background: #ddd;
 	font-size: 16px;
+	font-family: sans-serif;
 }
 
 #root {
@@ -22,6 +23,7 @@ body {
 		padding: 0.5em 0.5em;
 		display: inline-block;
 		margin: 0;
+		color: #000000;
 		background: #fff;
 		border: 1px solid #ddd;
 		box-sizing: border-box;
@@ -36,14 +38,15 @@ body {
 		padding: 0.5em 1em;
 		display: inline-block;
 		margin: 0;
-		background: #eee;
+		color: #fff;
+		background: #eb4742;
 		cursor: pointer;
-		border: 1px solid #ddd;
+		border: 1px solid #eb4742;
 		transition: 0.25s;
 
 		&:hover {
-			background: darken( #eee, 25% );
-			border-color: darken( #eee, 25% );
+			background: darken( #eb4742, 25% );
+			border-color: darken( #eb4742, 25% );
 		}
 	}
 }
@@ -64,18 +67,20 @@ body {
 			text-transform: capitalize;
 			cursor: pointer;
 			display: block;
-			width: 70%;
+			width: 90%;
 			float: left;
+			padding-left: 20px;
 		}
 
 		.save-btn {
-			background: #ccc;
+			background: #adadad;
+			color: #fff;
 			padding: 0.5em;
 			display: inline-block;
-			text-transform: uppercase;
+			text-transform: capitalize;
 			cursor: pointer;
 			display: block;
-			width: 30%;
+			width: 10%;
 			float: left;
 			text-align: center;
 		}
@@ -92,7 +97,7 @@ body {
 		display: flex;
 
 		.keyword {
-			background: #eee;
+			background: #ededed;
 			padding: 0.5em;
 			display: inline-block;
 			text-transform: capitalize;
@@ -103,11 +108,11 @@ body {
 		}
 
 		.remove-btn {
-			background: #f00;
+			background: #eb4742;
 			color: #fff;
 			padding: 0.5em;
 			display: inline-block;
-			text-transform: uppercase;
+			text-transform: capitalize;
 			cursor: pointer;
 			display: block;
 			width: 30%;
@@ -119,20 +124,21 @@ body {
 
 .download-keyword {
 	.download-csv {
-		width: 100%;
+		width: 30%;
 		font-size: 16px;
 		font-size: 1em;
 		padding: 0.5em 1em;
 		display: inline-block;
 		margin: 0;
-		background: #eee;
+		color: #fff;
+		background: #eb4742;
 		cursor: pointer;
 		border: 1px solid #ddd;
 		transition: 0.25s;
 
 		&:hover {
-			background: darken( #eee, 25% );
-			border-color: darken( #eee, 25% );
+			background: darken( #eb4742, 25% );
+			border-color: darken( #eb4742, 25% );
 		}
 	}
 }

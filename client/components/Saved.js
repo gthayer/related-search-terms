@@ -20,7 +20,7 @@ const Saved = React.createClass({
 		return (
 		  <div className="saved-keywords">
 
-		  	<h3>Saved Search Terms</h3>
+		  	<h3>My Saved Keywords</h3>
 
 		 	No keywords have been saved yet.
 
