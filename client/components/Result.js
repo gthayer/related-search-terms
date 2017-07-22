@@ -4,10 +4,17 @@ const Result = React.createClass({
 
   render() {
 
-  	const { result, i } = this.props;
+  	var savedClass;
+  	const { result, results, i } = this.props;
+
+  	if ( results.includes(result) ) {
+  		savedClass = 'saved search-result';
+  	} else {
+  		savedClass = 'search-result';
+  	}
 
 	return (
-	  <div className="search-result">
+	  <div className={savedClass}>
 
 	  	<span onClick={ e => this.props.keyword_search( result ) } className="result">{ result }</span>
 

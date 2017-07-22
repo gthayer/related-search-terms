@@ -17,15 +17,9 @@ const Saved = React.createClass({
 		  </div>
 		)
   	} else {
-		return (
-		  <div className="saved-keywords">
-
-		  	<h3>My Saved Keywords</h3>
-
-		 	No keywords have been saved yet.
-
-		  </div>
-		)
+  		return (
+		  <div className="saved-keywords clearfix"></div>
+  		)
   	}
   }
 });

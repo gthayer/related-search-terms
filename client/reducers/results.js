@@ -3,10 +3,21 @@ function result(state = [], action) {
 
   	case 'SAVE_KEYWORD' :
 
-		return [
-			...state,
-			action.keyword
-		]
+  		if ( state.includes( action.keyword ) ) {
+  			var i = state.indexOf( action.keyword );
+
+			return [
+				...state.slice( 0,i ),
+				...state.slice( i+1 )
+			]
+
+  		} else {
+
+			return [
+				...state,
+				action.keyword
+			]
+		}
 
   	case 'REMOVE_KEYWORD' :
 

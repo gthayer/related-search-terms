@@ -9,9 +9,7 @@ const Main = React.createClass({
   render() {
     return (
       <div className="content">
-        <h1>
-          <Link to="/">Keyword Search</Link>
-        </h1>
+        <h1>Keyword Search</h1>
         
         {React.cloneElement({...this.props}.children, {...this.props})}
 
