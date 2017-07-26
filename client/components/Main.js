@@ -4,6 +4,7 @@ import css from './style.scss';
 import Results from './Results';
 import Saved from './Saved';
 import Download from './Download';
+import Footer from './Footer';
 
 const Main = React.createClass({
   render() {
@@ -18,6 +19,8 @@ const Main = React.createClass({
         <Saved {...this.props} />
 
         <Download {...this.props} />
+
+        <Footer/>
 
       </div>
     )
