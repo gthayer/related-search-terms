@@ -2,26 +2,29 @@ import React from 'react';
 
 const Saved = React.createClass({
 
-  render() {
+	render() {
 
-  	const { results, keyword, i } = this.props;
+		const { results, keyword, i } = this.props;
 
-  	if ( results.length > 0 ) {
-		return (
-		  <div className="saved-keywords clearfix">
+		if ( results.length > 0 ) {
+			return (
+				<div className="saved-keywords clearfix">
 
-		  	<h3>My Saved Keywords</h3>
+					<div className="wrap">
 
-			{ results.map((result, i) => <div className="saved-keyword" key={i} ><span className="keyword">{result}</span><span onClick={ e => this.props.remove_keyword( i ) } className="remove-btn">Remove</span></div> ) }
+						<h3>My Saved Keywords</h3>
 
-		  </div>
-		)
-  	} else {
-  		return (
-		  <div className="saved-keywords clearfix"></div>
-  		)
-  	}
-  }
+						{ results.map((result, i) => <div className="saved-keyword" key={i} ><span className="keyword">{result}</span><span onClick={ e => this.props.remove_keyword( i ) } className="remove-btn">Remove</span></div> ) }
+
+					</div>
+				</div>
+			)
+		} else {
+			return (
+				<div></div>
+			)
+		}
+	}
 });
 
 export default Saved;

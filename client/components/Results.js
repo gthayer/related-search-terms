@@ -3,18 +3,27 @@ import Result from './Result';
 
 const Results = React.createClass({
 
-  render() {
+	render() {
 
-  	const { results } = this.props.search;
+		const { results } = this.props.search;
 
-		return (
-		  <div className="search-results clearfix">
+		if ( results.length > 0 ) {
+			return (
+				<div className="search-results clearfix">
 
-		  	{ results.map((result, i) => <Result {...this.props} key={i} i={i} result={result} /> ) }
+					<div className="wrap">
+						{ results.map((result, i) => <Result {...this.props} key={i} i={i} result={result} /> ) }
+					</div>
 
-		  </div>
-		)
-  }
+				</div>
+			)
+		} else {
+			return (
+				<div></div>
+			)
+		}
+
+	}
 });
 
 export default Results;
