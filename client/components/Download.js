@@ -16,7 +16,7 @@ const Download = React.createClass({
 			)
 		} else {
 			return (
-				<div className="download-keyword"></div>
+				<div></div>
 			)
 		}
 	}

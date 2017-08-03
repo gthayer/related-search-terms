@@ -17,6 +17,7 @@ body {
 
 #root {
 	margin: 0 auto;
+	padding-bottom: 5em;
 }
 
 .wrap {
@@ -157,6 +158,8 @@ h1 {
 }
 
 .download-keyword {
+	padding: 1em 0;
+
 	.download-csv {
 		width: 100%;
 		font-size: 16px;
@@ -174,6 +177,35 @@ h1 {
 			background: darken( #eb4742, 25% );
 			border-color: darken( #eb4742, 25% );
 		}
+	}
+}
+
+.footer {
+	position: fixed;
+	margin-top: 1em;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 2em;
+	background: #525354;
+	color: #d7d8d9;
+	text-align: center;
+
+	a {
+		color: #d7d8d9;
+		text-decoration: none;
+		font-weight: bold;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	img {
+		height: 35px;
+		position: relative;
+		top: 0.5em;
+		margin-right: 2em;
 	}
 }
 

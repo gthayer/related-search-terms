@@ -9,7 +9,8 @@ const Footer = React.createClass({
 
 				<div className="wrap">
 
-					footer
+					<a target="_blank" title="Hall Internet Marketing" href="https://hallme.com"><img src="/assets/hall-logo-no-bg.png" alt="Hall Internet Marketing" /></a>
+					Provided by <a target="_blank" title="Hall Internet Marketing" href="https://hallme.com">Hall Internet Marketing</a>
 
 				</div>
 			</div>
