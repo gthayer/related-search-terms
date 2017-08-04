@@ -20,6 +20,24 @@ export function update_search( value ) {
 	}
 }
 
+export function getLocation( results ) {
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(getLocationComplete);
+	}
+}
+
+export function getLocationComplete( position ) {
+	savePosition( position.coords );
+}
+
+export function savePosition( coords ) {
+    return {
+    	type: 'GET_LOCATION',
+    	lat: coords.latitude,
+    	lng: coords.longitude
+    }
+}
+
 export function keyword_search( keyword, e ) {
 
 	if ( typeof e != 'undefined' ) {
@@ -44,7 +62,10 @@ export function keyword_search( keyword, e ) {
 			});
 		}
 	} else {
-		return search_init([]);
+		return (
+			getLocation(),
+			search_init([])
+		)
 	}
 }
 

@@ -24125,6 +24125,9 @@
 	exports.receive_results = receive_results;
 	exports.search_init = search_init;
 	exports.update_search = update_search;
+	exports.getLocation = getLocation;
+	exports.getLocationComplete = getLocationComplete;
+	exports.savePosition = savePosition;
 	exports.keyword_search = keyword_search;
 	exports.download_csv = download_csv;
 	exports.save_keyword = save_keyword;
@@ -24151,6 +24154,24 @@
 		};
 	}
 	
+	function getLocation(results) {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(getLocationComplete);
+		}
+	}
+	
+	function getLocationComplete(position) {
+		savePosition(position.coords);
+	}
+	
+	function savePosition(coords) {
+		return {
+			type: 'GET_LOCATION',
+			lat: coords.latitude,
+			lng: coords.longitude
+		};
+	}
+	
 	function keyword_search(keyword, e) {
 	
 		if (typeof e != 'undefined') {
@@ -24171,7 +24192,7 @@
 				});
 			};
 		} else {
-			return search_init([]);
+			return getLocation(), search_init([]);
 		}
 	}
 	
@@ -31878,6 +31899,13 @@
 					init: true
 				});
 	
+			case 'GET_LOCATION':
+				console.log('GET_LOCATION');
+				return _extends({}, state, {
+					results: [],
+					location: 'test'
+				});
+	
 			default:
 				return state;
 		}
@@ -31942,7 +31970,6 @@
 	
 			case 'DOWNLOAD_CSV':
 	
-				//let data = [["name1", "city1", "some other info"], ["name2", "city2", "more info"]];
 				var data = action.saved;
 	
 				var csvContent = "data:text/csv;charset=utf-8,";

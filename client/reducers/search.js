@@ -22,6 +22,14 @@ function search(state = [], action) {
 			init: true
 		}
 
+	case 'GET_LOCATION' :
+	console.log('GET_LOCATION');
+		return {
+			...state,
+			results: [],
+			location: 'test'
+		}
+
 	default:
 	  return state;
   }
