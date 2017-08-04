@@ -178,8 +178,8 @@ h1 {
 		@include transition(all 0.25s ease-in-out);
 
 		&:hover {
-			background: darken( #eb4742, 25% );
-			border-color: darken( #eb4742, 25% );
+			background: darken( #eb4742, 15% );
+			border-color: darken( #eb4742, 15% );
 		}
 	}
 }
