@@ -186,7 +186,7 @@ h1 {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	padding: 2em;
+	padding: 1.5em;
 	background: #525354;
 	color: #d7d8d9;
 	text-align: center;
@@ -201,11 +201,14 @@ h1 {
 		}
 	}
 
+	p {
+		display: none;
+	}
+
 	img {
 		height: 35px;
 		position: relative;
 		top: 0.5em;
-		margin-right: 2em;
 	}
 }
 
@@ -219,4 +222,16 @@ h1 {
 }
 .clearfix {
   zoom: 1; /* For IE 6/7 (trigger hasLayout) */
+}
+
+@media screen and ( min-width: 500px ) {
+	.footer {
+		p {
+			display: inline-block;
+		}
+
+		img {
+			margin-right: 2em;
+		}
+	}
 }
