@@ -37,6 +37,10 @@ h1 {
 	background: #fff;
 }
 
+.description {
+	text-align: center;
+}
+
 .search-area {
 
 	margin-bottom: 2em;
@@ -227,7 +231,7 @@ h1 {
 @media screen and ( min-width: 500px ) {
 	.footer {
 		p {
-			display: inline-block;
+			display: inline;
 		}
 
 		img {
