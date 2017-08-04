@@ -10,7 +10,7 @@ const Main = React.createClass({
   render() {
     return (
       <div className="content">
-        <h1>Related Search Term Finder</h1>
+        <h1>Related Search</h1>
 
         <p className="description">
           Search Google for related search terms and export them to CSV

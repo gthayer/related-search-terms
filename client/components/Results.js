@@ -5,7 +5,7 @@ const Results = React.createClass({
 
 	render() {
 
-		const { results } = this.props.search;
+		const { results, init } = this.props.search;
 
 		if ( results.length > 0 ) {
 			return (
@@ -17,12 +17,15 @@ const Results = React.createClass({
 
 				</div>
 			)
+		} else if ( ! init ) {
+			return (
+				<div className="search-results clearfix">No Results</div>
+			)
 		} else {
 			return (
 				<div></div>
-			)
+			)	
 		}
-
 	}
 });
 

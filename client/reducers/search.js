@@ -5,13 +5,21 @@ function search(state = [], action) {
 
 		return {
 			...state,
-			results: action.results
+			results: action.results,
+			init: false
 		}
 
 	case 'UPDATE_SEARCH' :
 		return {
 			...state,
 			keyword: action.value
+		}
+
+	case 'SEARCH_INIT' :
+		return {
+			...state,
+			results: [],
+			init: true
 		}
 
 	default:

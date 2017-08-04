@@ -6,6 +6,13 @@ export function receive_results( results ) {
 	}
 }
 
+export function search_init( results ) {
+	return {
+		type: 'SEARCH_INIT',
+		results
+	}
+}
+
 export function update_search( value ) {
 	return {
 		type: 'UPDATE_SEARCH',
@@ -37,7 +44,7 @@ export function keyword_search( keyword, e ) {
 			});
 		}
 	} else {
-		return receive_results([]);
+		return search_init([]);
 	}
 }
 
