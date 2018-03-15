@@ -25,7 +25,7 @@ $xpath = new DOMXPath($dom);
 
 $keywords = array();
 
-foreach( $xpath->query('//p[contains(attribute::class, "_Bmc")]') as $e ) {
+foreach( $xpath->query('//p[contains(attribute::class, "aw5cc")]') as $e ) {
     array_push( $keywords, $e->textContent );
 }
 
